@@ -23,5 +23,5 @@ where `$(PWD)/notebooks` would be a folder where you would store all your notebo
 If you want to start a jupyterlab instead, you can do it with the following command (assuming you are using the `notebooks/` path as an example):
 
 ```bash
-$ docker run --rm -p 8888:8888 -v $(PWD)/notebooks:/home/jovyan/work --name jupyter_pyspark jupyter_spark_custom start.sh jupyter lab
+$ docker run --rm -p 8888:8888 -v $(PWD)/notebooks:/home/jovyan/work -e JUPYTER_ENABLE_LAB=yes --name jupyter_pyspark jupyter_spark_custom
 ```
