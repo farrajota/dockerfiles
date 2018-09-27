@@ -1,0 +1,37 @@
+version: '2'
+
+volumes:
+  pgadmin-data:
+
+services:
+  postgres:
+    image: postgres:10.3
+    env_file:
+      - ./postgres-env.file
+    volumes:
+       - postgres-data:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+  pgadmin:
+    build: .
+    volumes:
+       - pgadmin-data:/pgadmin/
+       - ./data:/home
+    ports:
+      - "5050:5050"
+    networks:
+      - postgres
+    links:
+      - postgres:postgres
+
+volumes:
+  postgres-data:
+  pgadmin-data:
+
+networks:
+  postgres:
+    driver: bridge
